@@ -17,7 +17,9 @@ export const Results: React.FC<IResultsScreenProps> = ({
   };
 
   const handleImagePress = (item: IImage) => {
-    navigation.navigate('Details', { image: item });
+    if (item) {
+      navigation.navigate('Details', { image: item });
+    }
   };
 
   const _renderItem = ({ item }: { item: IImage }) => (
