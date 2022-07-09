@@ -50,7 +50,12 @@ export const SearchBar: React.FC<ISearchBarProps> = ({
 
   return (
     <S.Container testID={testID} style={style}>
-      <S.IconButton name="search" size={22} onPress={handleIconPress} />
+      <S.IconButton
+        testID={`${testID}-searchButton`}
+        name="search"
+        size={22}
+        onPress={handleIconPress}
+      />
       <S.Input
         testID={`${testID}-input`}
         ref={inputRef}
@@ -62,7 +67,12 @@ export const SearchBar: React.FC<ISearchBarProps> = ({
       />
       <S.ClearIconContainer>
         {!!searchText && (
-          <S.IconButton name="close" size={18} onPress={handleClear} />
+          <S.IconButton
+            testID={`${testID}-clearButton`}
+            name="close"
+            size={18}
+            onPress={handleClear}
+          />
         )}
       </S.ClearIconContainer>
     </S.Container>
