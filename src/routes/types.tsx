@@ -1,10 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack';
-import { IImage } from '../services';
+import { IImageResult } from '../services';
 
 export type RootStackParamList = {
   Home: undefined;
   Results: { search: string };
-  Details: { image: IImage };
+  Details: { image: IImageResult };
 };
 
 export type IHomeScreenProps = StackScreenProps<RootStackParamList, 'Home'>;

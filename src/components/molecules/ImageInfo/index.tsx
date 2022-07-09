@@ -1,11 +1,11 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { IImage } from '../../../services';
+import { IImageResult } from '../../../services';
 import * as S from './styles';
 
 export interface IImageInfoProps {
   testID?: string;
-  image?: IImage;
+  image?: IImageResult;
   style?: ViewStyle;
 }
 

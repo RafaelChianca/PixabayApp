@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ResultsTemplate } from '../../components/templates';
 import { IResultsScreenProps } from '../../routes/types';
-import { IImage, mockedData } from '../../services';
+import { IImageResult, mockedData } from '../../services';
 import * as S from './styles';
 
 export const Results: React.FC<IResultsScreenProps> = ({
@@ -16,13 +16,13 @@ export const Results: React.FC<IResultsScreenProps> = ({
     setResults([]);
   };
 
-  const handleImagePress = (item: IImage) => {
+  const handleImagePress = (item: IImageResult) => {
     if (item) {
       navigation.navigate('Details', { image: item });
     }
   };
 
-  const _renderItem = ({ item }: { item: IImage }) => (
+  const _renderItem = ({ item }: { item: IImageResult }) => (
     <S.ImageButton onPress={() => handleImagePress(item)}>
       <S.ImageItem
         source={{
@@ -43,7 +43,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
       listProps={{
         data: results,
         renderItem: _renderItem,
-        keyExtractor: (item: IImage) => item.id.toString(),
+        keyExtractor: (item: IImageResult) => item.id.toString(),
         onEndReachedThreshold: 0.5,
         onEndReached: () => console.log('end reached'),
       }}

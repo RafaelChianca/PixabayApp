@@ -1,13 +1,13 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { IImage } from '../../../services';
+import { IImageResult } from '../../../services';
 import { ImageInfo } from '../../molecules';
 import * as S from './styles';
 
 export interface IDetailsTemplateProps {
   testID?: string;
   style?: ViewStyle;
-  image?: IImage;
+  image?: IImageResult;
 }
 
 export const DetailsTemplate: React.FC<IDetailsTemplateProps> = ({

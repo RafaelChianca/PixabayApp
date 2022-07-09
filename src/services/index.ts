@@ -1,4 +1,4 @@
-export interface IImage {
+export interface IImageResult {
   id: number;
   pageURL: string;
   tags: string[];
@@ -8,7 +8,7 @@ export interface IImage {
   height: number;
 }
 
-export const mockedData: IImage[] = [
+export const mockedData: IImageResult[] = [
   {
     id: 1,
     pageURL: '',
