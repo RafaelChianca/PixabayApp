@@ -1,5 +1,5 @@
 import React from 'react';
-import { ViewStyle } from 'react-native';
+import { Linking, ViewStyle } from 'react-native';
 import { SearchBar } from '../../molecules';
 import { ISearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
@@ -15,6 +15,12 @@ export const HomeTemplate: React.FC<IHomeTemplateProps> = ({
   searchBarProps,
   style,
 }) => {
+  const pixabayURL = 'https://pixabay.com/';
+
+  const handleLink = () => {
+    Linking.openURL(pixabayURL);
+  };
+
   return (
     <S.Container testID={testID} style={style}>
       <S.ImageContainer
@@ -32,7 +38,10 @@ export const HomeTemplate: React.FC<IHomeTemplateProps> = ({
         <S.CenterContainer>
           <SearchBar testID={`${testID}-searchBar`} {...searchBarProps} />
         </S.CenterContainer>
-        <S.BottomContainer />
+        <S.BottomContainer>
+          <S.Link>All images provided by</S.Link>
+          <S.Link onPress={handleLink}>https://pixabay.com/</S.Link>
+        </S.BottomContainer>
       </S.ImageContainer>
     </S.Container>
   );

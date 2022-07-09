@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.text};
   align-items: center;
   justify-content: center;
   flex: 1;
@@ -32,6 +32,7 @@ export const CenterContainer = styled.View`
 
 export const BottomContainer = styled.View`
   flex: 1;
+  justify-content: flex-end;
 `;
 
 export const Title = styled.Text`
@@ -45,4 +46,10 @@ export const Description = styled.Text`
   color: ${({ theme }) => theme.colors.invertedText};
   text-align: center;
   font-weight: bold;
+`;
+
+export const Link = styled.Text`
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.invertedText};
+  text-align: center;
 `;
