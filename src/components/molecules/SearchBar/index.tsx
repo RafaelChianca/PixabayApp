@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef } from 'react';
 import { Keyboard, TextInput, ViewStyle } from 'react-native';
 import * as S from './styles';
 
@@ -6,6 +6,8 @@ export interface ISearchBarProps {
   testID?: string;
   onChangeText?: (text: string) => void;
   onSearch?: () => void;
+  onClear?: () => void;
+  value?: string;
   style?: ViewStyle;
 }
 
@@ -13,10 +15,13 @@ export const SearchBar: React.FC<ISearchBarProps> = ({
   testID = '@SearchBar',
   onChangeText,
   onSearch,
+  onClear,
+  value,
   style,
 }) => {
   const inputRef = useRef<null | TextInput>(null);
-  const [searchText, setSearchText] = useState('');
+
+  const searchText = useMemo(() => value, [value]);
 
   const handleSearch = () => {
     if (searchText) {
@@ -34,13 +39,13 @@ export const SearchBar: React.FC<ISearchBarProps> = ({
   };
 
   const handleInput = (text: string) => {
-    setSearchText(text);
     onChangeText?.(text);
   };
 
   const handleClear = () => {
     inputRef?.current?.clear();
     handleInput('');
+    onClear?.();
   };
 
   return (
@@ -50,12 +55,13 @@ export const SearchBar: React.FC<ISearchBarProps> = ({
         testID={`${testID}-input`}
         ref={inputRef}
         placeholder="Search images"
-        onChangeText={handleInput}
         returnKeyType="search"
+        onChangeText={handleInput}
         onEndEditing={handleSearch}
+        value={searchText}
       />
       <S.ClearIconContainer>
-        {searchText && (
+        {!!searchText && (
           <S.IconButton name="close" size={18} onPress={handleClear} />
         )}
       </S.ClearIconContainer>
