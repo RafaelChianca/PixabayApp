@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
 import { HomeTemplate } from '../../components/templates';
 import { IHomeScreenProps } from '../../routes/types';
 
-export const Home: React.FC<IHomeScreenProps> = () => {
+export const Home: React.FC<IHomeScreenProps> = ({ navigation }) => {
   const [searchText, setSearchText] = useState('');
-
-  const navigation = useNavigation();
 
   const handleSearch = () => {
     if (searchText) {
+      setSearchText('');
       navigation.navigate('Results', { search: searchText });
     }
   };
