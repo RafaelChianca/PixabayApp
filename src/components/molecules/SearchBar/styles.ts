@@ -20,11 +20,10 @@ export const ClearIconContainer = styled.View`
   align-items: center;
 `;
 
-export const Input = styled.TextInput.attrs({
-  //TODO: add global style
-  placeholderTextColor: 'black',
-  color: 'black',
-})`
+export const Input = styled.TextInput.attrs(({ theme }) => ({
+  placeholderTextColor: theme.colors.background,
+  color: theme.colors.text,
+}))`
   height: 100%;
   flex: 8;
 `;

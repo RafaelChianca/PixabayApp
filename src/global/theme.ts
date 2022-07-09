@@ -4,14 +4,17 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       text: string;
+      invertedText: string;
       background: string;
     };
   }
 }
 
+//TODO: add dark theme
 export const theme: DefaultTheme = {
   colors: {
     text: '#000000',
+    invertedText: '#FFFFFF',
     background: '#E0E0E0',
   },
 };
