@@ -1,133 +1,24 @@
-export interface IImageResult {
-  id: number;
-  pageURL: string;
-  tags: string[];
-  imageURL: string;
-  user: string;
-  width: number;
-  height: number;
-}
+import { env } from '../config';
+import axios from 'axios';
+import store, { IImageItem, setImageResults, setLoading } from '../store';
 
-export const mockedData: IImageResult[] = [
-  {
-    id: 1,
-    pageURL: '',
-    tags: [
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-      'nature',
-    ],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 2,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 3,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 4,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 5,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 6,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 7,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 8,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 9,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-  {
-    id: 10,
-    pageURL: '',
-    tags: ['1, 2, 3'],
-    imageURL:
-      'https://st2.depositphotos.com/6544740/9337/i/600/depositphotos_93376372-stock-photo-sunset-over-sea-pier.jpg',
-    user: 'chianca',
-    width: 1920,
-    height: 1080,
-  },
-];
+export type IImageSearchResponse = {
+  total: number;
+  totalHits: number;
+  hits: IImageItem[];
+};
+
+export const fetchImages = async (searchString: string) => {
+  const url = `${env.baseUrl}/api/?key=${env.apiKey}&q=${encodeURIComponent(
+    searchString.trim(),
+  )}&image_type=photo`;
+
+  try {
+    store.dispatch(setLoading(true));
+    const response = await axios.get<IImageSearchResponse>(url);
+    store.dispatch(setImageResults(response.data));
+  } catch (error) {
+    //TODO: add error handling
+  }
+  store.dispatch(setLoading(false));
+};
