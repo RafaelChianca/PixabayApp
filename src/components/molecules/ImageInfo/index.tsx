@@ -1,11 +1,11 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { IImageResult } from '../../../services';
+import { IImageItem } from '../../../store';
 import * as S from './styles';
 
 export interface IImageInfoProps {
   testID?: string;
-  image?: IImageResult;
+  image?: IImageItem;
   style?: ViewStyle;
 }
 
@@ -16,30 +16,33 @@ export const ImageInfo: React.FC<IImageInfoProps> = ({
 }) => {
   return (
     <S.Container testID={testID} style={style}>
-      {image?.imageURL && <S.Image source={{ uri: image.imageURL }} />}
-      {image?.tags && image?.tags.length > 0 && (
-        <S.DescriptionContainer>
+      {image?.webformatURL && <S.Image source={{ uri: image.webformatURL }} />}
+      {image?.tags && (
+        <S.InfoContainer>
           <S.Title>Tags: </S.Title>
-          {image.tags.map((tag, index) => (
-            <S.Description>
-              {tag + (index < image.tags.length - 1 ? ', ' : '')}
-            </S.Description>
-          ))}
-        </S.DescriptionContainer>
+          <S.DescriptionContainer>
+            <S.Description>{image.tags}</S.Description>
+          </S.DescriptionContainer>
+        </S.InfoContainer>
       )}
-      {image?.width && image?.height && (
-        <S.DescriptionContainer>
+      {image?.webformatHeight && image?.webformatWidth && (
+        <S.InfoContainer>
           <S.Title>Resolution: </S.Title>
-          <S.Description>
-            {image.width} x {image.height}
-          </S.Description>
-        </S.DescriptionContainer>
+          <S.DescriptionContainer>
+            <S.Description>
+              {image.webformatWidth} x {image.webformatHeight} (webformat
+              version)
+            </S.Description>
+          </S.DescriptionContainer>
+        </S.InfoContainer>
       )}
       {image?.user && (
-        <S.DescriptionContainer>
+        <S.InfoContainer>
           <S.Title>Uploaded by: </S.Title>
-          <S.Description>{image.user}</S.Description>
-        </S.DescriptionContainer>
+          <S.DescriptionContainer>
+            <S.Description>{image.user}</S.Description>
+          </S.DescriptionContainer>
+        </S.InfoContainer>
       )}
     </S.Container>
   );
