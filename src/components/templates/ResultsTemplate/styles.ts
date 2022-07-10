@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
-import { IImageResult } from '../../../services';
+import { IImageItem } from '../../../store';
 
 export const LoadingContainer = styled.View`
   flex: 1;
@@ -17,7 +17,7 @@ export const Container = styled.SafeAreaView`
   flex: 1;
 `;
 
-export const List = styled(FlatList as new () => FlatList<IImageResult>)`
+export const List = styled(FlatList as new () => FlatList<IImageItem>)`
   flex: 1;
   padding: 0px 20px;
 `;

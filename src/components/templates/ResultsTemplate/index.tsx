@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatListProps, ViewStyle } from 'react-native';
-import { IImageResult } from '../../../services';
+import { IImageItem } from '../../../store';
 import { SearchBar } from '../../molecules';
 import { ISearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
@@ -8,7 +8,7 @@ import * as S from './styles';
 export interface IResultsTemplateProps {
   testID?: string;
   searchBarProps: ISearchBarProps;
-  listProps: FlatListProps<IImageResult>;
+  listProps: FlatListProps<IImageItem>;
   loading?: boolean;
   style?: ViewStyle;
 }
