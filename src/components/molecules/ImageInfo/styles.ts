@@ -7,8 +7,7 @@ export const Container = styled.View`
 `;
 
 export const Image = styled(FastImage)`
-  height: 200px;
-  background-color: red;
+  min-height: 200px;
   margin-bottom: 20px;
 `;
 
@@ -18,10 +17,13 @@ export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.text};
 `;
 
+export const InfoContainer = styled.View`
+  margin-bottom: 20px;
+`;
+
 export const DescriptionContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
-  margin-bottom: 20px;
 `;
 
 export const Description = styled.Text`
