@@ -2,12 +2,13 @@ import styled from 'styled-components/native';
 import FastImage from 'react-native-fast-image';
 
 export const Container = styled.View`
+  height: 100%;
   width: 100%;
   padding: 0px 20px;
 `;
 
 export const Image = styled(FastImage)`
-  min-height: 200px;
+  height: 200px;
   margin-bottom: 20px;
 `;
 

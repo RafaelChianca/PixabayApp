@@ -1,5 +1,6 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
+import { useOrientation } from '../../../hooks';
 import { IImageItem } from '../../../store';
 import * as S from './styles';
 
@@ -14,9 +15,17 @@ export const ImageInfo: React.FC<IImageInfoProps> = ({
   image,
   style,
 }) => {
+  const orientation = useOrientation();
+
   return (
     <S.Container testID={testID} style={style}>
-      {image?.webformatURL && <S.Image source={{ uri: image.webformatURL }} />}
+      {image?.webformatURL && (
+        <S.Image
+          key={orientation}
+          resizeMode={orientation === 'PORTRAIT' ? 'cover' : 'center'}
+          source={{ uri: image.webformatURL }}
+        />
+      )}
       {image?.tags && (
         <S.InfoContainer>
           <S.Title>Tags: </S.Title>
@@ -30,8 +39,7 @@ export const ImageInfo: React.FC<IImageInfoProps> = ({
           <S.Title>Resolution: </S.Title>
           <S.DescriptionContainer>
             <S.Description>
-              {image.webformatWidth} x {image.webformatHeight} (webformat
-              version)
+              {image.imageHeight} x {image.imageWidth}
             </S.Description>
           </S.DescriptionContainer>
         </S.InfoContainer>
