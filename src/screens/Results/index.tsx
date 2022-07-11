@@ -11,7 +11,7 @@ import { IResultsScreenProps } from '../../routes/types';
 import { fetchImages } from '../../services';
 import {
   clearImageSearch,
-  IImageItem,
+  ImageItem,
   incrementPage,
   RootState,
 } from '../../store';
@@ -36,7 +36,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
     dispatch(clearImageSearch());
   };
 
-  const handleImagePress = (item: IImageItem) => {
+  const handleImagePress = (item: ImageItem) => {
     if (item) {
       navigation.navigate('Details', { image: item });
     }
@@ -78,7 +78,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
     }
   }, [error]);
 
-  const _renderItem = ({ item }: { item: IImageItem }) => {
+  const _renderItem = ({ item }: { item: ImageItem }) => {
     return (
       <ImageButton
         image={item}
@@ -107,7 +107,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
         key: 'resultsList',
         data: hits,
         renderItem: _renderItem,
-        keyExtractor: (item: IImageItem) => `${item.id.toString()}`,
+        keyExtractor: (item: ImageItem) => `${item.id.toString()}`,
         onEndReached: handleEndReached,
         removeClippedSubviews: false,
       }}

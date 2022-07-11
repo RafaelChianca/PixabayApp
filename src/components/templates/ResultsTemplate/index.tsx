@@ -1,28 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import { FlatListProps, ViewStyle } from 'react-native';
-import { IImageItem } from '../../../store';
+import { ImageItem } from '../../../store';
 import { Header, SearchBar } from '../../molecules';
-import { IHeader } from '../../molecules/Header';
-import { ISearchBarProps } from '../../molecules/SearchBar';
+import { HeaderProps } from '../../molecules/Header';
+import { SearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
 
-export interface CustomFlatListProps extends FlatListProps<IImageItem> {
+export interface CustomFlatListProps extends FlatListProps<ImageItem> {
   key?: React.Key;
 }
 
-export interface IResultsTemplateProps {
+export interface ResultsTemplateProps {
   testID?: string;
-  searchBarProps: ISearchBarProps;
+  searchBarProps: SearchBarProps;
   listProps: CustomFlatListProps;
   loading?: boolean;
   isFooterVisible?: boolean;
   isEmptyListVisible?: boolean;
-  headerProps: IHeader;
+  headerProps: HeaderProps;
   style?: ViewStyle;
 }
 
-export const ResultsTemplate: React.FC<IResultsTemplateProps> = ({
+export const ResultsTemplate: React.FC<ResultsTemplateProps> = ({
   testID = '@ResultsTemplate',
   searchBarProps,
   listProps,

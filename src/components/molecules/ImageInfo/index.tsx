@@ -1,16 +1,16 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
 import { useOrientation } from '../../../hooks';
-import { IImageItem } from '../../../store';
+import { ImageItem } from '../../../store';
 import * as S from './styles';
 
-export interface IImageInfoProps {
+export interface ImageInfoProps {
   testID?: string;
-  image?: IImageItem;
+  image?: ImageItem;
   style?: ViewStyle;
 }
 
-export const ImageInfo: React.FC<IImageInfoProps> = ({
+export const ImageInfo: React.FC<ImageInfoProps> = ({
   testID = '@ImageInfo',
   image,
   style,

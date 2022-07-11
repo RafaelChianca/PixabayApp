@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IImageSearchResponse } from '../../services';
 
-export interface IImageItem {
+export interface ImageItem {
   id: number;
   tags?: string;
   imageURL?: string;
@@ -14,14 +14,14 @@ export interface IImageItem {
   userImageURL: string;
 }
 
-export interface IImageState extends IImageSearchResponse {
+export interface ImageState extends IImageSearchResponse {
   page: number;
   searchTerm: string;
   loading: boolean;
   error: string;
 }
 
-const initialState: IImageState = {
+const initialState: ImageState = {
   page: 1,
   searchTerm: '',
   hits: [],
@@ -35,23 +35,23 @@ const ImageSlice = createSlice({
   name: 'images',
   initialState,
   reducers: {
-    setError: (state: IImageState, action: PayloadAction<string>) => {
+    setError: (state: ImageState, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    setLoading: (state: IImageState, action: PayloadAction<boolean>) => {
+    setLoading: (state: ImageState, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-    resetPage: (state: IImageState) => {
+    resetPage: (state: ImageState) => {
       state.page = 1;
     },
-    incrementPage: (state: IImageState) => {
+    incrementPage: (state: ImageState) => {
       state.page = state.page + 1;
     },
-    decrementPage: (state: IImageState) => {
+    decrementPage: (state: ImageState) => {
       state.page = state.page - 1;
     },
     setImageResults: (
-      state: IImageState,
+      state: ImageState,
       action: PayloadAction<
         IImageSearchResponse & { searchTerm: string; page: number }
       >,
@@ -64,7 +64,7 @@ const ImageSlice = createSlice({
       state.error = '';
     },
     addImageResults: (
-      state: IImageState,
+      state: ImageState,
       action: PayloadAction<
         IImageSearchResponse & { searchTerm: string; page: number }
       >,
@@ -77,7 +77,7 @@ const ImageSlice = createSlice({
         state.error = '';
       }
     },
-    clearImageSearch: (state: IImageState) => {
+    clearImageSearch: (state: ImageState) => {
       state.page = 1;
       state.searchTerm = '';
       state.hits = [];

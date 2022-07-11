@@ -3,7 +3,7 @@ import { ColorValue, ViewStyle } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as S from './styles';
 
-export interface IIconButtonProps {
+export interface IconButtonProps {
   testID?: string;
   name: string;
   size?: number;
@@ -12,7 +12,7 @@ export interface IIconButtonProps {
   style?: ViewStyle;
 }
 
-export const IconButton: React.FC<IIconButtonProps> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   testID = '@IconButton',
   name,
   size,

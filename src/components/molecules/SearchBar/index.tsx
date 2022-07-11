@@ -2,7 +2,7 @@ import React, { useMemo, useRef } from 'react';
 import { Keyboard, TextInput, ViewStyle } from 'react-native';
 import * as S from './styles';
 
-export interface ISearchBarProps {
+export interface SearchBarProps {
   testID?: string;
   onChangeText?: (text: string) => void;
   onSearch?: () => void;
@@ -11,7 +11,7 @@ export interface ISearchBarProps {
   style?: ViewStyle;
 }
 
-export const SearchBar: React.FC<ISearchBarProps> = ({
+export const SearchBar: React.FC<SearchBarProps> = ({
   testID = '@SearchBar',
   onChangeText,
   onSearch,

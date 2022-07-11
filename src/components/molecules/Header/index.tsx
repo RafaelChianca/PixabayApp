@@ -3,7 +3,7 @@ import { ViewStyle } from 'react-native';
 
 import * as S from './styles';
 
-export interface IHeader {
+export interface HeaderProps {
   testID?: string;
   title?: string;
   isButtonVisible?: boolean;
@@ -11,7 +11,7 @@ export interface IHeader {
   style?: ViewStyle;
 }
 
-export const Header: React.FC<IHeader> = ({
+export const Header: React.FC<HeaderProps> = ({
   testID = '@Header',
   title,
   isButtonVisible = true,

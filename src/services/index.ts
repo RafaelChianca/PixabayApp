@@ -2,7 +2,7 @@ import { env } from '../config';
 import axios, { AxiosError } from 'axios';
 import store, {
   addImageResults,
-  IImageItem,
+  ImageItem,
   setError,
   setImageResults,
   setLoading,
@@ -11,7 +11,7 @@ import store, {
 export type IImageSearchResponse = {
   total: number;
   totalHits: number;
-  hits: IImageItem[];
+  hits: ImageItem[];
 };
 
 export const fetchImages = async (

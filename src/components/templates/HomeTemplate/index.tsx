@@ -1,16 +1,16 @@
 import React from 'react';
 import { Linking, ViewStyle } from 'react-native';
 import { SearchBar } from '../../molecules';
-import { ISearchBarProps } from '../../molecules/SearchBar';
+import { SearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
 
-export interface IHomeTemplateProps {
+export interface HomeTemplateProps {
   testID?: string;
-  searchBarProps: ISearchBarProps;
+  searchBarProps: SearchBarProps;
   style?: ViewStyle;
 }
 
-export const HomeTemplate: React.FC<IHomeTemplateProps> = ({
+export const HomeTemplate: React.FC<HomeTemplateProps> = ({
   testID = '@HomeTemplate',
   searchBarProps,
   style,

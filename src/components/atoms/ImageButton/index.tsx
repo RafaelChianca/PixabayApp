@@ -1,16 +1,16 @@
 import React from 'react';
 import { Orientation } from '../../../hooks/useOrientation';
-import { IImageItem } from '../../../store';
+import { ImageItem } from '../../../store';
 import * as S from './styles';
 
-export interface IImageButton {
+export interface ImageButtonProps {
   testID?: string;
   orientation?: Orientation;
-  onPress?: (item: IImageItem) => void;
-  image: IImageItem;
+  onPress?: (item: ImageItem) => void;
+  image: ImageItem;
 }
 
-export const ImageButton: React.FC<IImageButton> = ({
+export const ImageButton: React.FC<ImageButtonProps> = ({
   testID = '@ImageButton',
   orientation = 'PORTRAIT',
   onPress,

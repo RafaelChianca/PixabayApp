@@ -1,18 +1,18 @@
 import React from 'react';
 import { ViewStyle } from 'react-native';
-import { IImageItem } from '../../../store';
+import { ImageItem } from '../../../store';
 import { Header, ImageInfo } from '../../molecules';
-import { IHeader } from '../../molecules/Header';
+import { HeaderProps } from '../../molecules/Header';
 import * as S from './styles';
 
-export interface IDetailsTemplateProps {
+export interface DetailsTemplateProps {
   testID?: string;
-  image?: IImageItem;
-  headerProps: IHeader;
+  image?: ImageItem;
+  headerProps: HeaderProps;
   style?: ViewStyle;
 }
 
-export const DetailsTemplate: React.FC<IDetailsTemplateProps> = ({
+export const DetailsTemplate: React.FC<DetailsTemplateProps> = ({
   testID = '@DetailsTemplate',
   image,
   headerProps,
