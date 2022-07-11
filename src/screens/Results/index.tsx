@@ -37,15 +37,11 @@ export const Results: React.FC<IResultsScreenProps> = ({
     }
   };
 
-  const handleSearch = () => {
-    //TODO: add check for second search
-    if (page > 1 && searchText !== searchTerm) {
+  const handleSearchPressed = () => {
+    if (searchText !== searchTerm) {
       handleClear();
       fetchImages(searchText, 1, perPage);
-      return;
     }
-
-    fetchImages(searchText, page, perPage);
   };
 
   const handleEndReached = () => {
@@ -66,7 +62,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
 
   useEffect(() => {
     if (page > 1 && !loading) {
-      handleSearch();
+      fetchImages(searchTerm, page, perPage);
     }
   }, [page]);
 
@@ -98,7 +94,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
         value: searchText,
         onChangeText: setSearchText,
         onClear: handleClear,
-        onSearch: handleSearch,
+        onSearch: handleSearchPressed,
       }}
       listProps={{
         data: hits,
