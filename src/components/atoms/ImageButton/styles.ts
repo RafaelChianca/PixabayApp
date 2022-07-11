@@ -17,6 +17,6 @@ export const ImageButton = styled.TouchableOpacity<CustomTouchableOpacityProps>`
 `;
 
 export const ImageItem = styled(FastImage)<CustomFastImageProps>`
-  min-height: 200px;
-  width: ${props => (props.orientation === 'PORTRAIT' ? 100 : 45)}%;
+  height: 200px;
+  width: ${props => (props.orientation === 'PORTRAIT' ? 100 : 70)}%;
 `;
