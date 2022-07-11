@@ -102,6 +102,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
         onChangeText: setSearchText,
         onClear: handleClear,
         onSearch: handleSearchPressed,
+        style: { borderRadius: 0 },
       }}
       listProps={{
         key: 'resultsList',

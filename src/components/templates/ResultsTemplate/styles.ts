@@ -21,7 +21,6 @@ export const Container = styled.SafeAreaView`
 
 export const List = styled(FlatList as new () => FlatList<ImageItem>)`
   flex: 1;
-  padding: 0px 20px;
 `;
 
 export const EmptyListMessage = styled.Text`
