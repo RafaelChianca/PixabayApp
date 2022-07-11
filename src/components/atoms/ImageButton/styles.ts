@@ -3,17 +3,13 @@ import FastImage, { FastImageProps } from 'react-native-fast-image';
 import styled from 'styled-components/native';
 import { Orientation } from '../../../hooks/useOrientation';
 
-interface CustomTouchableOpacityProps extends TouchableOpacityProps {
-  orientation?: Orientation;
-}
-
 interface CustomFastImageProps extends FastImageProps {
   orientation?: Orientation;
 }
 
-export const ImageButton = styled.TouchableOpacity<CustomTouchableOpacityProps>`
-  margin: ${props =>
-    props.orientation === 'PORTRAIT' ? '10px 0px' : '10px 30px 10px 0px'};
+export const Button = styled.TouchableOpacity<TouchableOpacityProps>`
+  margin: 10px 0px;
+  align-items: center;
 `;
 
 export const ImageItem = styled(FastImage)<CustomFastImageProps>`

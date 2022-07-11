@@ -1,4 +1,5 @@
 import React from 'react';
+import { ViewStyle } from 'react-native';
 import { Orientation } from '../../../hooks/useOrientation';
 import { ImageItem } from '../../../store';
 import * as S from './styles';
@@ -8,6 +9,7 @@ export interface ImageButtonProps {
   orientation?: Orientation;
   onPress?: (item: ImageItem) => void;
   image: ImageItem;
+  style?: ViewStyle;
 }
 
 export const ImageButton: React.FC<ImageButtonProps> = ({
@@ -15,12 +17,13 @@ export const ImageButton: React.FC<ImageButtonProps> = ({
   orientation = 'PORTRAIT',
   onPress,
   image,
+  style,
 }) => {
   return (
-    <S.ImageButton
+    <S.Button
       testID={`${testID}-button`}
-      orientation={orientation}
       onPress={() => onPress?.(image)}
+      style={style}
     >
       <S.ImageItem
         testID={`${testID}-image`}
@@ -29,6 +32,6 @@ export const ImageButton: React.FC<ImageButtonProps> = ({
           uri: image.webformatURL,
         }}
       />
-    </S.ImageButton>
+    </S.Button>
   );
 };
