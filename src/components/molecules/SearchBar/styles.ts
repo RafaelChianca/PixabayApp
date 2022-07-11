@@ -4,7 +4,7 @@ import { IconButton as Icon } from '../../atoms';
 export const Container = styled.View`
   height: 70px;
   width: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.invertedText};
   flex-direction: row;
   border-radius: 6px;
 `;

@@ -6,6 +6,7 @@ declare module 'styled-components' {
       text: string;
       invertedText: string;
       background: string;
+      placeholderText: string;
     };
   }
 }
@@ -16,5 +17,6 @@ export const theme: DefaultTheme = {
     text: '#000000',
     invertedText: '#FFFFFF',
     background: '#E0E0E0',
+    placeholderText: '#E0E0E0',
   },
 };
