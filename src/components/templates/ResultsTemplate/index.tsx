@@ -2,7 +2,8 @@
 import React from 'react';
 import { FlatListProps, ViewStyle } from 'react-native';
 import { IImageItem } from '../../../store';
-import { SearchBar } from '../../molecules';
+import { Header, SearchBar } from '../../molecules';
+import { IHeader } from '../../molecules/Header';
 import { ISearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
 
@@ -15,8 +16,9 @@ export interface IResultsTemplateProps {
   searchBarProps: ISearchBarProps;
   listProps: CustomFlatListProps;
   loading?: boolean;
-  showFooter?: boolean;
-  showListEmpty?: boolean;
+  isFooterVisible?: boolean;
+  isEmptyListVisible?: boolean;
+  headerProps: IHeader;
   style?: ViewStyle;
 }
 
@@ -25,8 +27,9 @@ export const ResultsTemplate: React.FC<IResultsTemplateProps> = ({
   searchBarProps,
   listProps,
   loading = false,
-  showFooter = false,
-  showListEmpty = false,
+  isFooterVisible = false,
+  isEmptyListVisible = false,
+  headerProps,
   style,
 }) => {
   return (
@@ -37,6 +40,7 @@ export const ResultsTemplate: React.FC<IResultsTemplateProps> = ({
         </S.FlexContainer>
       ) : (
         <S.Container style={style}>
+          <Header {...headerProps} />
           <S.List
             testID={testID}
             ListHeaderComponent={
@@ -46,17 +50,17 @@ export const ResultsTemplate: React.FC<IResultsTemplateProps> = ({
             stickyHeaderHiddenOnScroll
             ListFooterComponent={
               <>
-                {showFooter && (
+                {isFooterVisible && (
                   <S.LoadingIndicator
                     testID={`${testID}-footerLoadingIndicator`}
                   />
                 )}
               </>
             }
-            contentContainerStyle={{ flex: showListEmpty ? 1 : 0 }}
+            contentContainerStyle={{ flex: isEmptyListVisible ? 1 : 0 }}
             ListEmptyComponent={
               <>
-                {showListEmpty && (
+                {isEmptyListVisible && (
                   <S.FlexContainer>
                     <S.EmptyListMessage>
                       Sorry. We couldn't find a match for your search.

@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
+import { ImageButton } from '../../components/atoms';
 
 import { ResultsTemplate } from '../../components/templates';
 import { env } from '../../config';
+import { useOrientation } from '../../hooks';
 import { IResultsScreenProps } from '../../routes/types';
 import { fetchImages } from '../../services';
 import {
@@ -13,19 +15,22 @@ import {
   incrementPage,
   RootState,
 } from '../../store';
-import * as S from './styles';
 
 export const Results: React.FC<IResultsScreenProps> = ({
   navigation,
   route,
 }) => {
-  const [searchText, setSearchText] = useState(route?.params?.search || '');
   const perPage = env.resultsPerPage;
 
+  const [searchText, setSearchText] = useState(route?.params?.search || '');
+
   const dispatch = useDispatch();
+
   const { hits, loading, totalHits, searchTerm, page, error } = useSelector(
     (state: RootState) => state.image,
   );
+
+  const orientation = useOrientation();
 
   const handleClear = () => {
     dispatch(clearImageSearch());
@@ -75,22 +80,23 @@ export const Results: React.FC<IResultsScreenProps> = ({
 
   const _renderItem = ({ item }: { item: IImageItem }) => {
     return (
-      <S.ImageButton key={item.id} onPress={() => handleImagePress(item)}>
-        <S.ImageItem
-          key={item.id}
-          source={{
-            uri: item.webformatURL,
-          }}
-        />
-      </S.ImageButton>
+      <ImageButton
+        image={item}
+        orientation={orientation}
+        onPress={handleImagePress}
+      />
     );
   };
 
   return (
     <ResultsTemplate
+      headerProps={{
+        title: 'Results',
+        onBack: () => navigation.pop(),
+      }}
       loading={loading && hits.length === 0}
-      showFooter={loading && hits.length > 0}
-      showListEmpty={!loading && totalHits === 0 && !!searchTerm}
+      isFooterVisible={loading && hits.length > 0}
+      isEmptyListVisible={!loading && totalHits === 0 && !!searchTerm}
       searchBarProps={{
         value: searchText,
         onChangeText: setSearchText,
@@ -98,9 +104,10 @@ export const Results: React.FC<IResultsScreenProps> = ({
         onSearch: handleSearchPressed,
       }}
       listProps={{
+        key: 'resultsList',
         data: hits,
         renderItem: _renderItem,
-        keyExtractor: (item: IImageItem) => item.id.toString(),
+        keyExtractor: (item: IImageItem) => `${item.id.toString()}`,
         onEndReached: handleEndReached,
         removeClippedSubviews: false,
       }}
