@@ -1,6 +1,6 @@
 # React Native Pixabay App
 
-This project is a coding challenge that aims to implement a infinite scrolling image search application using [Pixabay's](https://github.com/axios/axios) API.
+This project is a coding challenge that aims to implement a infinite scrolling image search application using [Pixabay's](https://pixabay.com/) API.
 
 ## Base dependencies
 
