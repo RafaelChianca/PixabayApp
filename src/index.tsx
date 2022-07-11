@@ -6,8 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
 
 import store from './store';
-import { theme } from './global/theme';
 import { AppStack } from './routes';
+import { darkTheme, lightTheme } from './global/theme';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
           <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
           <AppStack />
         </ThemeProvider>

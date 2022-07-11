@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.SafeAreaView`
-  background-color: ${({ theme }) => theme.colors.text};
+  background-color: black;
   align-items: center;
   justify-content: center;
   flex: 1;
@@ -37,19 +37,19 @@ export const BottomContainer = styled.View`
 
 export const Title = styled.Text`
   font-size: 32px;
-  color: ${({ theme }) => theme.colors.invertedText};
+  color: white;
   font-weight: bold;
 `;
 
 export const Description = styled.Text`
   font-size: 22px;
-  color: ${({ theme }) => theme.colors.invertedText};
+  color: white;
   text-align: center;
   font-weight: bold;
 `;
 
 export const Link = styled.Text`
   font-size: 18px;
-  color: ${({ theme }) => theme.colors.invertedText};
+  color: white;
   text-align: center;
 `;
