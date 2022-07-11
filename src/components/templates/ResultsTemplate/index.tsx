@@ -6,10 +6,14 @@ import { SearchBar } from '../../molecules';
 import { ISearchBarProps } from '../../molecules/SearchBar';
 import * as S from './styles';
 
+export interface CustomFlatListProps extends FlatListProps<IImageItem> {
+  key?: React.Key;
+}
+
 export interface IResultsTemplateProps {
   testID?: string;
   searchBarProps: ISearchBarProps;
-  listProps: FlatListProps<IImageItem>;
+  listProps: CustomFlatListProps;
   loading?: boolean;
   showFooter?: boolean;
   showListEmpty?: boolean;
@@ -35,7 +39,6 @@ export const ResultsTemplate: React.FC<IResultsTemplateProps> = ({
         <S.Container style={style}>
           <S.List
             testID={testID}
-            key={testID}
             ListHeaderComponent={
               <SearchBar testID={`${testID}-searchBar`} {...searchBarProps} />
             }
