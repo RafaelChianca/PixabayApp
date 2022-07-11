@@ -5,8 +5,8 @@ export interface IImageItem {
   id: number;
   tags?: string;
   imageURL?: string;
-  width?: number;
-  height?: number;
+  imageWidth: number;
+  imageHeight: number;
   webformatURL: string;
   webformatWidth: number;
   webformatHeight: number;
