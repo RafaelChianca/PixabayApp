@@ -51,6 +51,7 @@ export const Results: React.FC<IResultsScreenProps> = ({
   };
 
   useEffect(() => {
+    handleClear();
     if (route?.params?.search) {
       fetchImages(route?.params?.search, 1, perPage);
     }
