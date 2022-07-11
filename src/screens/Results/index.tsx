@@ -1,11 +1,18 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Alert } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Alert } from 'react-native';
 
 import { ResultsTemplate } from '../../components/templates';
+import { env } from '../../config';
 import { IResultsScreenProps } from '../../routes/types';
 import { fetchImages } from '../../services';
-import { clearImageSearch, IImageItem, RootState } from '../../store';
+import {
+  clearImageSearch,
+  IImageItem,
+  incrementPage,
+  RootState,
+} from '../../store';
 import * as S from './styles';
 
 export const Results: React.FC<IResultsScreenProps> = ({
@@ -13,9 +20,12 @@ export const Results: React.FC<IResultsScreenProps> = ({
   route,
 }) => {
   const [searchText, setSearchText] = useState(route?.params?.search || '');
+  const perPage = env.resultsPerPage;
 
   const dispatch = useDispatch();
-  const { hits, loading } = useSelector((state: RootState) => state.image);
+  const { hits, loading, totalHits, searchTerm, page, error } = useSelector(
+    (state: RootState) => state.image,
+  );
 
   const handleClear = () => {
     dispatch(clearImageSearch());
@@ -28,18 +38,49 @@ export const Results: React.FC<IResultsScreenProps> = ({
   };
 
   const handleSearch = () => {
-    fetchImages(searchText);
+    //TODO: add check for second search
+    if (page > 1 && searchText !== searchTerm) {
+      handleClear();
+      fetchImages(searchText, 1, perPage);
+      return;
+    }
+
+    fetchImages(searchText, page, perPage);
+  };
+
+  const handleEndReached = () => {
+    if (hits.length < totalHits) {
+      dispatch(incrementPage());
+    }
   };
 
   useEffect(() => {
-    handleSearch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (route?.params?.search) {
+      fetchImages(route?.params?.search, 1, perPage);
+    }
+
+    return () => {
+      dispatch(clearImageSearch());
+    };
   }, []);
+
+  useEffect(() => {
+    if (page > 1 && !loading) {
+      handleSearch();
+    }
+  }, [page]);
+
+  useEffect(() => {
+    if (error) {
+      return Alert.alert('Something went wrong!', error);
+    }
+  }, [error]);
 
   const _renderItem = ({ item }: { item: IImageItem }) => {
     return (
-      <S.ImageButton onPress={() => handleImagePress(item)}>
+      <S.ImageButton key={item.id} onPress={() => handleImagePress(item)}>
         <S.ImageItem
+          key={item.id}
           source={{
             uri: item.webformatURL,
           }}
@@ -50,7 +91,9 @@ export const Results: React.FC<IResultsScreenProps> = ({
 
   return (
     <ResultsTemplate
-      loading={loading}
+      loading={loading && hits.length === 0}
+      showFooter={loading && hits.length > 0}
+      showListEmpty={!loading && totalHits === 0 && !!searchTerm}
       searchBarProps={{
         value: searchText,
         onChangeText: setSearchText,
@@ -61,8 +104,8 @@ export const Results: React.FC<IResultsScreenProps> = ({
         data: hits,
         renderItem: _renderItem,
         keyExtractor: (item: IImageItem) => item.id.toString(),
-        onEndReachedThreshold: 0.5,
-        onEndReached: () => console.log('end reached'),
+        onEndReached: handleEndReached,
+        removeClippedSubviews: false,
       }}
     />
   );
